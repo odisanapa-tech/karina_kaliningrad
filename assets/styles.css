@@ -390,7 +390,7 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
 @media (max-width: 1000px) {
   .hero-grid { grid-template-columns: 1fr; gap: 60px; }
 }
-.hero-title { min-width: 0; }
+.hero-title { min-width: 0; container-type: inline-size; }
 .hero-tagline {
   font-family: var(--font-display);
   font-weight: 600;
@@ -416,9 +416,18 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
   -webkit-text-stroke: 1.2px var(--ink);
   line-height: 0.9;
   margin-left: -0.04em;
-  font-size: clamp(44px, 8.2vw, 118px);
-  overflow-wrap: break-word;
+  /* Шрифт масштабируется от ширины колонки — 15.5cqi гарантирует,
+     что самое длинное слово «АРТИСТОВ» (8 букв) целиком помещается,
+     не залезая под афишу справа. Vw-минимум держит адекватный размер
+     на очень широких viewport, где колонка вырастает. */
+  font-size: min(clamp(40px, 8vw, 118px), 15.5cqi);
+  overflow-wrap: normal;
   word-break: normal;
+  white-space: normal;
+}
+.hero-title h1 span {
+  white-space: nowrap;
+  display: inline-block;
 }
 .hero-title h1 .filled {
   color: var(--ink);
