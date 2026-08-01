@@ -476,6 +476,7 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
   overflow: hidden;
   box-shadow: var(--shadow-neon-lg);
   transition: transform .35s cubic-bezier(.2,.9,.3,1), box-shadow .35s, border-color .35s;
+  container-type: inline-size;
 }
 .hero-poster:hover {
   transform: translateY(-6px);
@@ -525,15 +526,18 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
 }
 .poster-title {
   font-family: var(--font-display);
-  font-size: clamp(48px, 6.4vw, 88px);
+  /* Ограничен и viewport-ом, и шириной самой афиши (container-query),
+     чтобы «КАСТИНГ» гарантированно помещался в колонке. */
+  font-size: min(clamp(40px, 6vw, 88px), 20cqi);
   font-weight: 900;
-  line-height: 0.82;
-  letter-spacing: -0.045em;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
   color: var(--ink);
   text-shadow: 0 0 30px rgba(0,0,0,0.7), 0 0 40px rgba(213,159,255,0.35);
   text-transform: uppercase;
   margin-top: auto;
   padding: 20px 0 8px;
+  white-space: nowrap;
 }
 .poster-title small {
   display: block;
