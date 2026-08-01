@@ -527,11 +527,12 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
 .poster-title {
   font-family: var(--font-display);
   /* Ограничен и viewport-ом, и шириной самой афиши (container-query),
-     чтобы «КАСТИНГ» гарантированно помещался в колонке. */
-  font-size: min(clamp(40px, 6vw, 88px), 20cqi);
+     чтобы «КАСТИНГ» гарантированно помещался в колонке — 14cqi даёт
+     запас на letter-spacing и высокие боковые буквы. */
+  font-size: min(clamp(34px, 5vw, 76px), 14cqi);
   font-weight: 900;
   line-height: 0.85;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   color: var(--ink);
   text-shadow: 0 0 30px rgba(0,0,0,0.7), 0 0 40px rgba(213,159,255,0.35);
   text-transform: uppercase;
