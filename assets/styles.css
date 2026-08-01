@@ -1621,6 +1621,7 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
   margin-top: 60px;
   align-items: start;
 }
+.parents-inside.single { grid-template-columns: 1fr; max-width: 68ch; }
 @media (max-width: 900px) { .parents-inside { grid-template-columns: 1fr; gap: 40px; } }
 .parents-inside-lead p {
   font-family: var(--font-display);
