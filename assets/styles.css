@@ -383,14 +383,14 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
-  gap: 56px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 90px;
   align-items: center;
 }
 @media (max-width: 1000px) {
   .hero-grid { grid-template-columns: 1fr; gap: 60px; }
 }
-.hero-title { min-width: 0; container-type: inline-size; }
+.hero-title { min-width: 0; container-type: inline-size; padding-right: 8px; }
 .hero-tagline {
   font-family: var(--font-display);
   font-weight: 600;
