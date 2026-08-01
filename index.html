@@ -991,43 +991,42 @@
   @media (max-width: 900px) { .karina { grid-template-columns: 1fr; gap: 40px; } }
   .karina-photo {
     aspect-ratio: 3/4;
-    background: linear-gradient(160deg, #2a1548 0%, #0a0612 100%);
+    background: #0a0612;
     border: 1px solid var(--line-strong);
     position: relative;
     overflow: hidden;
     box-shadow: var(--shadow-neon-lg);
   }
-  .karina-photo::before {
+  .karina-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: contrast(1.05) brightness(0.95);
+  }
+  .karina-photo::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(180,122,255,0.35), transparent 60%);
+    background:
+      radial-gradient(ellipse 80% 40% at 50% 100%, rgba(106,47,191,0.35), transparent 60%),
+      linear-gradient(180deg, transparent 65%, rgba(10,6,18,0.4) 100%);
+    pointer-events: none;
   }
-  .karina-photo::after {
-    content: 'ФОТО КАРИНЫ · КОНТРОВОЙ СВЕТ';
+  .karina-photo .name-badge {
     position: absolute;
     bottom: 24px; left: 24px;
+    z-index: 2;
     font-family: var(--font-display);
     font-size: 10px;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.3em;
     color: var(--neon-hot);
-    padding: 6px 12px;
-    background: rgba(10,6,18,0.6);
+    font-weight: 700;
+    padding: 8px 14px;
+    background: rgba(10,6,18,0.65);
     border: 1px solid var(--line-strong);
-    backdrop-filter: blur(6px);
-  }
-  .karina-photo .silhouette-lg {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .karina-photo .silhouette-lg svg {
-    width: 55%;
-    height: auto;
-    fill: url(#karinaGrad);
-    filter: drop-shadow(0 0 40px rgba(213,159,255,0.8));
+    backdrop-filter: blur(8px);
+    text-transform: uppercase;
   }
   .karina-bio h2 { margin-bottom: 32px; }
   .karina-bio p {
@@ -1056,9 +1055,9 @@
      BLOCK 10 — IMPROV & JAZZ
      ========================================================= */
   .jazz {
-    text-align: center;
     padding: clamp(80px, 12vw, 140px) 0;
     position: relative;
+    overflow: hidden;
   }
   .jazz::before {
     content: '';
@@ -1068,14 +1067,54 @@
       radial-gradient(ellipse 60% 40% at 50% 50%, rgba(180,122,255,0.12), transparent 60%);
     pointer-events: none;
   }
-  .jazz-content { max-width: 720px; margin: 0 auto; position: relative; }
+  .jazz-wrap {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+  }
+  @media (max-width: 900px) {
+    .jazz-wrap { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .jazz-photo {
+    aspect-ratio: 3/4;
+    background: #0a0612;
+    border: 1px solid var(--line-strong);
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--shadow-neon-lg);
+  }
+  .jazz-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: contrast(1.05) brightness(0.9);
+  }
+  .jazz-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 40% at 50% 100%, rgba(106,47,191,0.35), transparent 60%);
+    pointer-events: none;
+  }
+  .jazz-content { position: relative; }
+  .jazz h2 { text-align: left; }
+  @media (max-width: 900px) {
+    .jazz h2 { text-align: center; }
+    .jazz-content { text-align: center; }
+  }
   .jazz h2 { margin-bottom: 40px; }
   .jazz-tags {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 12px;
     margin: 40px 0;
+  }
+  @media (max-width: 900px) {
+    .jazz-tags { justify-content: center; }
   }
   .jazz-tags .tag {
     padding: 10px 20px;
@@ -1802,7 +1841,8 @@
     <div class="sec-num">Блок 09 · Автор системы</div>
     <div class="karina">
       <div class="karina-photo">
-        <div class="silhouette-lg"><svg viewBox="0 0 100 130"><use href="#silh"/></svg></div>
+        <img src="assets/karina-stage.jpg" alt="Карина Скипина" loading="lazy"/>
+        <div class="name-badge">Автор системы</div>
       </div>
       <div class="karina-bio">
         <h2>Карина<br/>Скипина</h2>
@@ -1822,19 +1862,24 @@
      ========================================================= -->
 <section class="jazz">
   <div class="wrap">
-    <div class="jazz-content">
-      <div class="sec-num" style="justify-content:center">Блок 10 · Только с Кариной</div>
-      <h2>Импровизация<br/>и джаз</h2>
-      <div class="jazz-tags">
-        <div class="tag">Джазовые стандарты</div>
-        <div class="tag">Импровизация</div>
-        <div class="tag">Мелизматика</div>
-        <div class="tag">Сольфеджио</div>
+    <div class="jazz-wrap">
+      <div class="jazz-photo">
+        <img src="assets/karina-piano.jpg" alt="Карина за фортепиано" loading="lazy"/>
       </div>
-      <p>Это то, чего <em>почти нет в городе</em>. Ребёнок перестаёт быть исполнителем чужой записи: он слышит гармонию, понимает, где в песне есть свобода, и может сделать по-своему.</p>
-      <p>Отсюда берётся то, что слышно сразу: <em>собственный почерк вместо копии оригинала</em>.</p>
-      <div class="jazz-cta">
-        <a href="#contacts" class="btn">Записаться к Карине</a>
+      <div class="jazz-content">
+        <div class="sec-num">Блок 10 · Только с Кариной</div>
+        <h2>Импровизация<br/>и джаз</h2>
+        <div class="jazz-tags">
+          <div class="tag">Джазовые стандарты</div>
+          <div class="tag">Импровизация</div>
+          <div class="tag">Мелизматика</div>
+          <div class="tag">Сольфеджио</div>
+        </div>
+        <p>Это то, чего <em>почти нет в городе</em>. Ребёнок перестаёт быть исполнителем чужой записи: он слышит гармонию, понимает, где в песне есть свобода, и может сделать по-своему.</p>
+        <p>Отсюда берётся то, что слышно сразу: <em>собственный почерк вместо копии оригинала</em>.</p>
+        <div class="jazz-cta">
+          <a href="#contacts" class="btn">Записаться к Карине</a>
+        </div>
       </div>
     </div>
   </div>
