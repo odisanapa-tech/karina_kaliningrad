@@ -828,6 +828,25 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
   fill: url(#castGrad);
   filter: drop-shadow(0 0 30px rgba(180,122,255,0.6));
 }
+.photo-slot > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  filter: contrast(1.05) saturate(1.05) brightness(0.95);
+  transition: transform .6s cubic-bezier(.2,.9,.3,1);
+}
+.photo-slot:hover > img { transform: scale(1.04); }
+.photo-slot.has-img::before {
+  background:
+    linear-gradient(180deg, rgba(10,6,18,0.3) 0%, rgba(10,6,18,0) 30%, rgba(10,6,18,0) 60%, rgba(10,6,18,0.85) 100%);
+}
+.photo-slot.has-img::after {
+  z-index: 2;
+}
 
 /* =========================================================
    BLOCK · THREE DIRECTIONS
@@ -1353,6 +1372,21 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
   fill: url(#arinaGrad);
   filter: drop-shadow(0 0 40px rgba(213,159,255,0.7));
 }
+.arina-photo > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  z-index: 0;
+  filter: contrast(1.05) saturate(1.05) brightness(0.92);
+}
+.arina-photo.has-img::before {
+  background:
+    linear-gradient(180deg, rgba(10,6,18,0.35) 0%, rgba(10,6,18,0) 30%, rgba(10,6,18,0) 55%, rgba(10,6,18,0.9) 100%),
+    radial-gradient(ellipse 90% 60% at 50% 105%, rgba(106,47,191,0.35), transparent 60%);
+}
 .arina-photo .label {
   position: relative;
   z-index: 2;
@@ -1500,22 +1534,30 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
   box-shadow: var(--shadow-neon);
   color: var(--ink);
 }
-.parents-teaser-word {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(50px, 8vw, 110px);
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--neon-hot);
-  letter-spacing: -0.04em;
-  line-height: 0.85;
-  text-align: center;
-  filter: drop-shadow(0 0 20px rgba(180,122,255,0.5));
+.parents-teaser-photo {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background: #0a0612;
 }
-.parents-teaser-word span {
-  display: block;
-  color: var(--ink);
-  -webkit-text-stroke: 0;
-  text-shadow: 0 0 30px rgba(213,159,255,0.6);
+.parents-teaser-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.05) saturate(1.1);
+  transition: transform .6s cubic-bezier(.2,.9,.3,1);
+}
+.parents-teaser:hover .parents-teaser-photo img { transform: scale(1.04); }
+.parents-teaser-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(106,47,191,0.35), transparent 60%);
+  pointer-events: none;
 }
 .parents-teaser-body h3 {
   text-transform: uppercase;
@@ -1668,17 +1710,48 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
 
 .parents-hero-visual {
   margin-top: 20px;
-  padding: 40px 32px;
+  padding: 0;
   border: 1px solid var(--line-strong);
   background: linear-gradient(135deg, rgba(180,122,255,0.05), rgba(106,47,191,0.02));
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: stretch;
   border-radius: 4px;
+  overflow: hidden;
+}
+.parents-hero-visual .hero-visual-photo {
+  position: relative;
+  min-height: 320px;
+  background: #0a0612;
+  overflow: hidden;
+}
+.parents-hero-visual .hero-visual-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.05) saturate(1.1) brightness(0.95);
+}
+.parents-hero-visual .hero-visual-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(106,47,191,0.35), transparent 60%);
+  pointer-events: none;
+}
+.parents-hero-visual .hero-visual-body {
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
 }
 @media (max-width: 780px) {
-  .parents-hero-visual { grid-template-columns: 1fr; gap: 24px; text-align: center; }
+  .parents-hero-visual { grid-template-columns: 1fr; }
+  .parents-hero-visual .hero-visual-photo { min-height: 260px; }
+  .parents-hero-visual .hero-visual-body { padding: 28px 24px; text-align: center; }
 }
 .parents-hero-visual .big-word {
   font-family: var(--font-display);
@@ -1916,35 +1989,32 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
   background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(180,122,255,0.15), transparent 65%);
 }
 .final .cast-strip {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 4px;
-  margin: 0 auto 80px;
-  max-width: 900px;
-  aspect-ratio: 8/2;
-}
-@media (max-width: 780px) { .final .cast-strip { grid-template-columns: repeat(4, 1fr); aspect-ratio: 4/2; } }
-.final .cast-strip .cell {
-  background: linear-gradient(180deg, #2a1548, #0f0619);
-  border: 1px solid var(--line);
+  display: block;
   position: relative;
+  margin: 0 auto 80px;
+  max-width: 1080px;
+  aspect-ratio: 16/6;
+  border: 1px solid var(--line-strong);
   overflow: hidden;
+  box-shadow: var(--shadow-neon);
+  border-radius: 4px;
 }
-.final .cast-strip .cell::before {
+.final .cast-strip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.1) saturate(1.15) brightness(0.95);
+}
+.final .cast-strip::after {
   content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 100%, rgba(180,122,255,0.3), transparent 60%);
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10,6,18,0.35) 0%, rgba(10,6,18,0) 30%, rgba(10,6,18,0) 55%, rgba(10,6,18,0.75) 100%);
+  pointer-events: none;
 }
-.final .cast-strip .cell .silhouette {
-  position: absolute; inset: 0;
-  display: flex; align-items: flex-end; justify-content: center;
-  padding-bottom: 5%;
-  opacity: 0.6;
-}
-.final .cast-strip .cell .silhouette svg {
-  width: 60%; height: auto;
-  fill: url(#castGrad);
-}
+@media (max-width: 780px) { .final .cast-strip { aspect-ratio: 4/3; margin-bottom: 60px; } }
 .final h2 {
   text-transform: uppercase;
   margin-bottom: 32px;
