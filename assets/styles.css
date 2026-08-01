@@ -755,12 +755,22 @@ main { padding-top: calc(var(--header-h) + var(--header-top) + 8px); }
    ========================================================= */
 .core-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
+  grid-template-columns: 1.55fr 0.45fr;
+  gap: 60px;
+  align-items: center;
   margin-top: 60px;
 }
-@media (max-width: 900px) { .core-grid { grid-template-columns: 1fr; gap: 40px; } }
+/* Компактное фото в .core-grid — квадрат, не тянется по высоте колонки */
+.core-grid .photo-slot {
+  aspect-ratio: 1/1;
+  max-height: 380px;
+  width: 100%;
+  align-self: center;
+}
+@media (max-width: 900px) {
+  .core-grid { grid-template-columns: 1fr; gap: 40px; }
+  .core-grid .photo-slot { max-height: 320px; }
+}
 .core-list {
   list-style: none;
   padding: 0;
